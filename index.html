@@ -3,984 +3,866 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>✨ สร้างนิทานมหัศจรรย์ ✨</title>
-<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600;700&family=Sriracha&display=swap" rel="stylesheet">
+<title>🌟 นิทานของฉัน 🌟</title>
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;500;600;700&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* ===================== ROOT & RESET ===================== */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --pink: #FF6B9D;
+    --purple: #A855F7;
+    --yellow: #FFD93D;
+    --green: #6BCB77;
+    --blue: #4D96FF;
+    --orange: #FF9A3C;
+    --light-pink: #FFF0F7;
+    --light-purple: #F3E8FF;
+    --light-yellow: #FFFBEA;
+    --light-green: #F0FFF4;
+    --light-blue: #EFF6FF;
+    --bg: #FFF8FD;
+    --card-shadow: 0 8px 24px rgba(168,85,247,0.15);
+    --card-radius: 24px;
+  }
 
-:root {
-  --pink:    #FF7EB3;
-  --pink-l:  #FFE4F0;
-  --yellow:  #FFD93D;
-  --yellow-l:#FFF6CC;
-  --mint:    #5DD8A4;
-  --mint-l:  #D6F5E9;
-  --sky:     #5BB8F5;
-  --sky-l:   #D6EDFF;
-  --purple:  #B57BEE;
-  --purple-l:#EEE0FF;
-  --orange:  #FF9F43;
-  --orange-l:#FFE9CC;
-  --cream:   #FFFBF4;
-  --shadow:  rgba(100,70,150,0.10);
-  --text:    #3D365C;
-  --text-s:  #7B6FA0;
-}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Mitr', 'Sarabun', sans-serif;
+    background: var(--bg);
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(255,107,157,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 90% 80%, rgba(168,85,247,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(77,150,255,0.05) 0%, transparent 70%);
+    min-height: 100vh;
+    padding: 0 0 60px 0;
+  }
 
-body {
-  font-family: 'Mitr', sans-serif;
-  background: var(--cream);
-  background-image:
-    radial-gradient(circle at 15% 10%, rgba(255,126,179,0.18) 0%, transparent 35%),
-    radial-gradient(circle at 85% 15%, rgba(91,184,245,0.18) 0%, transparent 35%),
-    radial-gradient(circle at 50% 90%, rgba(93,216,164,0.15) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(181,123,238,0.13) 0%, transparent 30%);
-  min-height: 100vh;
-  color: var(--text);
-  overflow-x: hidden;
-}
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #FF6B9D 0%, #A855F7 50%, #4D96FF 100%);
+    padding: 32px 20px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0 8px 32px rgba(168,85,247,0.3);
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -20px; left: -20px; right: -20px; bottom: -20px;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='10'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .header-stars {
+    font-size: 32px;
+    letter-spacing: 8px;
+    margin-bottom: 8px;
+    position: relative;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .header h1 {
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 3px 12px rgba(0,0,0,0.2);
+    position: relative;
+    line-height: 1.2;
+  }
+  .header p {
+    color: rgba(255,255,255,0.9);
+    font-size: clamp(14px, 3vw, 18px);
+    margin-top: 8px;
+    position: relative;
+  }
 
-/* ===================== BACKGROUND DECO ===================== */
-.bg-deco {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 0; overflow: hidden;
-}
-.bg-deco span {
-  position: absolute;
-  font-size: 2rem;
-  opacity: 0.12;
-  animation: driftFloat 12s ease-in-out infinite;
-}
-.bg-deco span:nth-child(1)  { top:5%;  left:3%;  animation-delay:0s;   font-size:2.5rem; }
-.bg-deco span:nth-child(2)  { top:12%; right:6%; animation-delay:2s;   font-size:1.8rem; }
-.bg-deco span:nth-child(3)  { top:40%; left:1%;  animation-delay:4s;   font-size:2.2rem; }
-.bg-deco span:nth-child(4)  { top:55%; right:2%; animation-delay:1s;   font-size:2rem;   }
-.bg-deco span:nth-child(5)  { top:75%; left:5%;  animation-delay:3s;   font-size:1.6rem; }
-.bg-deco span:nth-child(6)  { top:85%; right:7%; animation-delay:5s;   font-size:2.3rem; }
-.bg-deco span:nth-child(7)  { top:25%; left:50%; animation-delay:6s;   font-size:1.5rem; }
+  /* MAIN CONTAINER */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 16px 0;
+  }
 
-@keyframes driftFloat {
-  0%,100% { transform: translateY(0) rotate(0deg); }
-  33%      { transform: translateY(-18px) rotate(8deg); }
-  66%      { transform: translateY(10px) rotate(-5deg); }
-}
+  /* SECTION */
+  .section {
+    background: white;
+    border-radius: var(--card-radius);
+    padding: 28px 24px;
+    margin-bottom: 28px;
+    box-shadow: var(--card-shadow);
+    border: 3px solid transparent;
+    position: relative;
+  }
+  .section-char { border-color: #FFD6E8; }
+  .section-place { border-color: #D6E8FF; }
+  .section-mood { border-color: #E8D6FF; }
 
-/* ===================== LAYOUT ===================== */
-.container {
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 24px 16px 80px;
-  position: relative;
-  z-index: 1;
-}
+  .section-title {
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 20px;
+  }
+  .section-counter {
+    display: inline-block;
+    background: var(--pink);
+    color: white;
+    border-radius: 20px;
+    padding: 3px 14px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: 8px;
+  }
 
-/* ===================== HEADER ===================== */
-.header {
-  text-align: center;
-  padding: 36px 0 28px;
-  position: relative;
-}
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 14px;
+  }
 
-.header-badge {
-  display: inline-block;
-  background: linear-gradient(135deg, var(--yellow), var(--orange));
-  color: white;
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 5px 18px;
-  border-radius: 20px;
-  margin-bottom: 14px;
-  letter-spacing: 1px;
-  box-shadow: 0 4px 14px rgba(255,159,67,0.4);
-}
+  .card {
+    background: #FAFAFA;
+    border-radius: 20px;
+    padding: 12px 8px 14px;
+    text-align: center;
+    cursor: pointer;
+    border: 3px solid #F0F0F0;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border-color: var(--purple);
+  }
+  .card.selected {
+    border-color: var(--pink);
+    background: var(--light-pink);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(255,107,157,0.25);
+  }
+  .card.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 6px; right: 8px;
+    background: var(--pink);
+    color: white;
+    border-radius: 50%;
+    width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .card img {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 14px;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .card-emoji {
+    font-size: 22px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .card-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+    line-height: 1.3;
+  }
 
-.header h1 {
-  font-family: 'Sriracha', cursive;
-  font-size: clamp(2.2rem, 7vw, 3.6rem);
-  line-height: 1.15;
-  background: linear-gradient(135deg, #FF7EB3 0%, #B57BEE 50%, #5BB8F5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 12px;
-}
+  /* PLACE/MOOD: single select highlight */
+  .card.selected-place {
+    border-color: var(--blue);
+    background: var(--light-blue);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(77,150,255,0.25);
+  }
+  .card.selected-place::after {
+    content: '✓';
+    position: absolute;
+    top: 6px; right: 8px;
+    background: var(--blue);
+    color: white;
+    border-radius: 50%;
+    width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .card.selected-mood {
+    border-color: var(--purple);
+    background: var(--light-purple);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(168,85,247,0.25);
+  }
+  .card.selected-mood::after {
+    content: '✓';
+    position: absolute;
+    top: 6px; right: 8px;
+    background: var(--purple);
+    color: white;
+    border-radius: 50%;
+    width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
 
-.header-sub {
-  font-size: 1.1rem;
-  color: var(--text-s);
-  font-weight: 500;
-}
+  /* WARNING */
+  .warning-msg {
+    display: none;
+    background: #FFF3CD;
+    border: 2px solid #FFD93D;
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #7a5a00;
+    text-align: center;
+  }
+  .warning-msg.show { display: block; }
 
-.stars-row {
-  font-size: 1.6rem;
-  letter-spacing: 6px;
-  margin: 10px 0 0;
-  animation: twinkle 2.4s ease-in-out infinite alternate;
-}
-@keyframes twinkle {
-  0%   { opacity: 0.5; letter-spacing: 6px; }
-  100% { opacity: 1;   letter-spacing: 10px; }
-}
+  /* BIG BUTTON */
+  .btn-create {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 32px auto 0;
+    background: linear-gradient(135deg, #FF6B9D, #A855F7);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 20px 32px;
+    font-family: 'Mitr', sans-serif;
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(168,85,247,0.35);
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .btn-create:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(168,85,247,0.45);
+  }
+  .btn-create:active { transform: scale(0.97); }
 
-/* ===================== STEP BADGE ===================== */
-.step-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: white;
-  border-radius: 40px;
-  padding: 6px 18px 6px 8px;
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--text-s);
-  box-shadow: 0 3px 12px var(--shadow);
-  margin-bottom: 14px;
-}
-.step-num {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 0.85rem; color: white;
-}
+  /* STORY PANELS */
+  #story-output { display: none; }
+  .story-panels-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  @media (max-width: 500px) { .story-panels-grid { grid-template-columns: 1fr; } }
+  .story-panel {
+    background: linear-gradient(135deg, #FFF0F7 0%, #F3E8FF 100%);
+    border-radius: 20px;
+    padding: 20px 16px;
+    border: 3px solid #FFD6E8;
+    position: relative;
+    min-height: 120px;
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+  }
+  .story-panel:nth-child(2) { animation-delay: 0.1s; }
+  .story-panel:nth-child(3) { animation-delay: 0.2s; }
+  .story-panel:nth-child(4) { animation-delay: 0.3s; }
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(16px); }
+  }
+  .panel-number {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: white;
+    border-radius: 50px;
+    padding: 4px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .panel-text {
+    font-size: clamp(15px, 3vw, 18px);
+    font-weight: 500;
+    color: #444;
+    line-height: 1.7;
+  }
 
-/* ===================== CARD ===================== */
-.card {
-  background: white;
-  border-radius: 28px;
-  padding: 26px 22px;
-  margin-bottom: 22px;
-  box-shadow: 0 6px 28px var(--shadow), 0 1px 6px rgba(0,0,0,0.04);
-  position: relative;
-  overflow: hidden;
-  transition: box-shadow 0.3s;
-}
-.card:hover { box-shadow: 0 10px 36px rgba(100,70,150,0.14); }
+  /* ACTION BUTTONS */
+  .action-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+  .btn-action {
+    flex: 1;
+    min-width: 200px;
+    max-width: 280px;
+    padding: 18px 20px;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Mitr', sans-serif;
+    font-size: clamp(16px, 3.5vw, 20px);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  }
+  .btn-image {
+    background: linear-gradient(135deg, #FFD93D, #FF9A3C);
+    color: white;
+  }
+  .btn-video {
+    background: linear-gradient(135deg, #4D96FF, #6BCB77);
+    color: white;
+  }
+  .btn-action:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+  }
 
-.card-stripe {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 5px;
-  border-radius: 28px 28px 0 0;
-}
+  /* PROMPT OUTPUT */
+  .prompt-box {
+    display: none;
+    background: white;
+    border-radius: var(--card-radius);
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: var(--card-shadow);
+    border: 3px solid #FFE0B2;
+  }
+  .prompt-box.show { display: block; animation: fadeIn 0.4s ease; }
+  .prompt-box-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .prompt-text {
+    background: #F8F8FF;
+    border: 2px solid #E8E0FF;
+    border-radius: 16px;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #333;
+    margin-bottom: 14px;
+    font-family: 'Sarabun', sans-serif;
+    word-break: break-word;
+  }
+  .btn-copy {
+    background: var(--purple);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 24px;
+    font-family: 'Mitr', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  .btn-copy:hover { background: #9333EA; transform: scale(1.05); }
+  .btn-copy.copied { background: var(--green); }
 
-.card-title {
-  font-family: 'Sriracha', cursive;
-  font-size: 1.45rem;
-  color: var(--text);
-  margin-bottom: 6px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.card-hint {
-  font-size: 0.85rem;
-  color: var(--text-s);
-  margin-bottom: 18px;
-  font-weight: 400;
-}
+  .btn-open {
+    display: inline-block;
+    background: linear-gradient(135deg, #FF6B9D, #A855F7);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 32px;
+    font-family: 'Mitr', sans-serif;
+    font-size: clamp(16px, 3vw, 18px);
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 6px 20px rgba(168,85,247,0.3);
+    margin-top: 10px;
+  }
+  .btn-open:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(168,85,247,0.4);
+  }
 
-/* ===================== CHOICE BUTTONS ===================== */
-.choices {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
+  .instruction-text {
+    font-size: 14px;
+    color: #888;
+    margin-top: 12px;
+    line-height: 1.6;
+    background: var(--light-yellow);
+    border-radius: 12px;
+    padding: 12px 16px;
+    border-left: 4px solid var(--yellow);
+  }
 
-.choice-btn {
-  background: var(--cream);
-  border: 2.5px solid #EDE8F8;
-  border-radius: 18px;
-  padding: 11px 18px;
-  font-family: 'Mitr', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.34,1.56,0.64,1);
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  min-width: 110px;
-  justify-content: center;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  position: relative;
-}
-.choice-btn:hover {
-  transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  border-color: #cbb8f5;
-}
-.choice-btn:active { transform: scale(0.95); }
+  /* VIDEO PROMPTS */
+  .video-scene-box {
+    background: linear-gradient(135deg, #EFF6FF, #E8D6FF);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+    border: 2px solid #C4B5FD;
+  }
+  .video-scene-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--purple);
+    margin-bottom: 8px;
+  }
 
-.choice-btn.selected {
-  color: white;
-  border-color: transparent;
-  transform: translateY(-3px) scale(1.06);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.16);
-}
+  /* SECTION DIVIDER */
+  .section-divider {
+    text-align: center;
+    font-size: 28px;
+    letter-spacing: 10px;
+    margin: 8px 0 28px;
+  }
 
-/* Group-specific selected colors */
-.char-group  .choice-btn.selected { background: linear-gradient(135deg, var(--pink), #e0479e); }
-.place-group .choice-btn.selected { background: linear-gradient(135deg, var(--mint), #23b87a); }
-.mood-group  .choice-btn.selected { background: linear-gradient(135deg, var(--purple), #8c3de0); }
+  /* RESET */
+  .btn-reset {
+    display: block;
+    margin: 0 auto;
+    background: white;
+    color: #888;
+    border: 2px solid #EEE;
+    border-radius: 50px;
+    padding: 10px 28px;
+    font-family: 'Mitr', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.2s;
+  }
+  .btn-reset:hover { border-color: var(--pink); color: var(--pink); }
 
-.choice-btn .em { font-size: 1.35rem; }
+  /* LOADING */
+  .loading-dots {
+    display: none;
+    text-align: center;
+    font-size: 32px;
+    margin: 20px 0;
+    animation: blink 1s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-.char-badge {
-  position: absolute;
-  top: -8px; right: -8px;
-  width: 22px; height: 22px;
-  background: var(--yellow);
-  border-radius: 50%;
-  font-size: 0.7rem;
-  font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  color: #7a5500;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  display: none;
-}
-.choice-btn.selected .char-badge { display: flex; }
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #F0F0F0; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb { background: #C4B5FD; border-radius: 4px; }
 
-.char-count-display {
-  text-align: center;
-  margin-top: 14px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--pink);
-  min-height: 22px;
-  transition: all 0.3s;
-}
-
-/* ===================== CREATE BUTTON ===================== */
-.btn-create-wrap { text-align: center; margin-top: 6px; }
-
-.btn-create {
-  display: inline-block;
-  padding: 18px 48px;
-  font-family: 'Sriracha', cursive;
-  font-size: 1.5rem;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  background: linear-gradient(135deg, #FF7EB3, #B57BEE, #5BB8F5);
-  background-size: 200% 200%;
-  animation: gradShift 4s ease infinite;
-  color: white;
-  box-shadow: 0 8px 30px rgba(181,123,238,0.45);
-  transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
-  -webkit-tap-highlight-color: transparent;
-}
-.btn-create:hover { transform: scale(1.06) translateY(-3px); box-shadow: 0 14px 40px rgba(181,123,238,0.55); }
-.btn-create:active { transform: scale(0.96); }
-
-@keyframes gradShift {
-  0%,100% { background-position: 0% 50%; }
-  50%      { background-position: 100% 50%; }
-}
-
-/* ===================== STORY PANELS ===================== */
-.panels-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-@media(max-width:520px){ .panels-grid { grid-template-columns:1fr; } }
-
-.panel-box {
-  border-radius: 20px;
-  padding: 18px 16px;
-  position: relative;
-  overflow: hidden;
-  animation: popIn 0.55s cubic-bezier(0.34,1.56,0.64,1) both;
-  min-height: 110px;
-}
-.panel-box:nth-child(1) { background: linear-gradient(135deg,#FFE4F0,#FFD0E6); animation-delay:0.05s; }
-.panel-box:nth-child(2) { background: linear-gradient(135deg,#D6F5E9,#B8EDDA); animation-delay:0.15s; }
-.panel-box:nth-child(3) { background: linear-gradient(135deg,#D6EDFF,#BEE0FF); animation-delay:0.25s; }
-.panel-box:nth-child(4) { background: linear-gradient(135deg,#EEE0FF,#DEC8FF); animation-delay:0.35s; }
-
-.panel-num {
-  font-family: 'Sriracha', cursive;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
-  opacity: 0.75;
-}
-.panel-box:nth-child(1) .panel-num { color: #c02870; }
-.panel-box:nth-child(2) .panel-num { color: #1a8c5a; }
-.panel-box:nth-child(3) .panel-num { color: #1060b8; }
-.panel-box:nth-child(4) .panel-num { color: #6420b0; }
-
-.panel-text {
-  font-size: 0.98rem;
-  font-weight: 500;
-  line-height: 1.6;
-  color: var(--text);
-}
-
-.panel-deco {
-  position: absolute;
-  bottom: 8px; right: 12px;
-  font-size: 2.2rem;
-  opacity: 0.22;
-}
-
-@keyframes popIn {
-  0%   { opacity:0; transform:scale(0.65) translateY(24px); }
-  100% { opacity:1; transform:scale(1) translateY(0); }
-}
-
-/* ===================== MODE SELECTION ===================== */
-.mode-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 4px;
-}
-@media(max-width:460px){ .mode-grid { grid-template-columns:1fr; } }
-
-.mode-btn {
-  border: 3px solid transparent;
-  border-radius: 22px;
-  padding: 22px 16px;
-  font-family: 'Sriracha', cursive;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
-  text-align: center;
-  -webkit-tap-highlight-color: transparent;
-  position: relative;
-  overflow: hidden;
-}
-.mode-btn::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: rgba(255,255,255,0.25);
-  transform: scale(0);
-  border-radius: inherit;
-  transition: transform 0.3s;
-}
-.mode-btn:hover::before { transform: scale(1); }
-.mode-btn:hover { transform: scale(1.04) translateY(-4px); }
-.mode-btn:active { transform: scale(0.97); }
-
-.mode-btn.active { border-color: white; box-shadow: 0 0 0 4px rgba(255,255,255,0.5); }
-
-.mode-image {
-  background: linear-gradient(135deg, #FF9F43, #FF6B6B);
-  box-shadow: 0 8px 28px rgba(255,107,107,0.4);
-  color: white;
-}
-.mode-video {
-  background: linear-gradient(135deg, #5BB8F5, #4A90E2);
-  box-shadow: 0 8px 28px rgba(74,144,226,0.4);
-  color: white;
-}
-
-.mode-icon { font-size: 2.6rem; display: block; margin-bottom: 8px; }
-.mode-label { display: block; font-size: 1.15rem; }
-.mode-desc { display: block; font-size: 0.78rem; font-family:'Mitr',sans-serif; font-weight:400; margin-top:4px; opacity:0.9; line-height:1.4; }
-
-/* ===================== OUTPUT AREA ===================== */
-.output-section { animation: slideUp 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
-
-@keyframes slideUp {
-  0%   { opacity:0; transform:translateY(36px); }
-  100% { opacity:1; transform:translateY(0); }
-}
-
-.prompt-box {
-  background: linear-gradient(135deg,#F8F3FF,#FDF0FF);
-  border: 2px dashed #C9A8F0;
-  border-radius: 18px;
-  padding: 16px 18px;
-  font-size: 0.9rem;
-  color: var(--text);
-  line-height: 1.65;
-  margin-bottom: 14px;
-  user-select: all;
-  font-weight: 500;
-  word-break: break-word;
-}
-
-.video-prompt-item {
-  background: linear-gradient(135deg,#EDF6FF,#E2F0FF);
-  border: 2px dashed #9AC8F5;
-  border-radius: 16px;
-  padding: 14px 16px;
-  margin-bottom: 12px;
-  animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
-}
-.video-prompt-item:nth-child(1) { animation-delay:0.05s; }
-.video-prompt-item:nth-child(2) { animation-delay:0.15s; }
-.video-prompt-item:nth-child(3) { animation-delay:0.25s; }
-.video-prompt-item:nth-child(4) { animation-delay:0.35s; }
-
-.vp-label {
-  font-family: 'Sriracha', cursive;
-  font-size: 0.88rem;
-  color: #1a6fbf;
-  margin-bottom: 8px;
-  display: flex; align-items:center; gap:6px;
-}
-.vp-text {
-  font-size: 0.88rem;
-  color: var(--text);
-  line-height: 1.6;
-  font-weight: 500;
-  user-select: all;
-  background: white;
-  border-radius: 10px;
-  padding: 8px 12px;
-  margin-bottom: 8px;
-  border: 1px solid #C8DFFF;
-  word-break: break-word;
-}
-
-/* ===================== BUTTONS ===================== */
-.btn-copy {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 20px;
-  font-family: 'Mitr', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.34,1.56,0.64,1);
-  -webkit-tap-highlight-color: transparent;
-  background: linear-gradient(135deg,var(--purple),#9b44e8);
-  color: white;
-  box-shadow: 0 4px 14px rgba(155,68,232,0.35);
-}
-.btn-copy:hover { transform: scale(1.06); box-shadow: 0 6px 20px rgba(155,68,232,0.45); }
-.btn-copy.done  { background: linear-gradient(135deg,var(--mint),#1fa86a); box-shadow: 0 4px 14px rgba(31,168,106,0.35); }
-
-.btn-open {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  padding: 14px 32px;
-  font-family: 'Sriracha', cursive;
-  font-size: 1.15rem;
-  border-radius: 50px;
-  color: white;
-  transition: all 0.22s cubic-bezier(0.34,1.56,0.64,1);
-  -webkit-tap-highlight-color: transparent;
-}
-.btn-open:hover { transform: scale(1.05) translateY(-2px); }
-.btn-open:active { transform: scale(0.96); }
-.btn-open-gemini {
-  background: linear-gradient(135deg,#FF9F43,#FF6B6B);
-  box-shadow: 0 8px 26px rgba(255,107,107,0.4);
-}
-.btn-open-sora {
-  background: linear-gradient(135deg,#5BB8F5,#4A90E2);
-  box-shadow: 0 8px 26px rgba(74,144,226,0.4);
-}
-
-.instruction-text {
-  font-size: 0.88rem;
-  color: var(--text-s);
-  font-weight: 500;
-  margin-top: 10px;
-  display: flex; align-items:flex-start; gap:6px;
-}
-
-.open-row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-top: 16px;
-  text-align: center;
-}
-
-/* ===================== HIDDEN / UTILS ===================== */
-.hidden { display: none !important; }
-
-.divider {
-  text-align: center;
-  font-size: 1.3rem;
-  letter-spacing: 8px;
-  margin: 4px 0;
-  opacity: 0.35;
-}
-
-.footer {
-  text-align: center;
-  padding: 24px 0 8px;
-  color: var(--text-s);
-  font-size: 0.82rem;
-}
-
-/* ===================== SHAKE ===================== */
-@keyframes shake {
-  0%,100%{ transform:translateX(0); }
-  18%    { transform:translateX(-8px); }
-  36%    { transform:translateX(8px); }
-  54%    { transform:translateX(-6px); }
-  72%    { transform:translateX(5px); }
-}
-.shake { animation: shake 0.45s both !important; }
-
-/* ===================== CONFETTI ===================== */
-.conf {
-  position: fixed;
-  width: 11px; height: 11px;
-  top: -16px;
-  border-radius: 3px;
-  pointer-events: none;
-  z-index: 9999;
-  animation: confFall linear forwards;
-}
-@keyframes confFall {
-  0%   { transform: translateY(0) rotate(0deg);    opacity:1; }
-  100% { transform: translateY(108vh) rotate(700deg); opacity:0; }
-}
-
-/* ===================== RESPONSIVE ===================== */
-@media(max-width:600px){
-  .card { padding: 20px 16px; }
-  .btn-create { padding: 16px 36px; font-size: 1.3rem; }
-}
+  @media (max-width: 600px) {
+    .cards-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+    .section { padding: 20px 14px; }
+  }
 </style>
 </head>
 <body>
 
-<!-- Background decoration -->
-<div class="bg-deco">
-  <span>🌟</span><span>✨</span><span>🦋</span>
-  <span>🌸</span><span>⭐</span><span>🌈</span><span>💫</span>
+<!-- HEADER -->
+<div class="header">
+  <div class="header-stars">⭐🌟✨🌟⭐</div>
+  <h1>📚 นิทานของฉัน 📚</h1>
+  <p>สร้างนิทานสุดพิเศษของตัวเองได้เลย!</p>
 </div>
 
 <div class="container">
 
-  <!-- ===== HEADER ===== -->
-  <div class="header">
-    <div class="header-badge">🎒 สำหรับเด็กชั้นประถม 1</div>
-    <h1>✨ สร้างนิทานมหัศจรรย์ ✨</h1>
-    <p class="header-sub">เลือกตัวละคร สถานที่ และบรรยากาศ แล้วสร้างนิทานของหนูเอง!</p>
-    <div class="stars-row">🌟 ⭐ 💫 ⭐ 🌟</div>
+  <!-- SECTION 1: CHARACTERS -->
+  <div class="section section-char">
+    <div class="section-title" style="color: var(--pink);">
+      🎭 เลือกตัวละคร
+      <span class="section-counter" id="char-counter">0/3</span>
+    </div>
+    <div class="section-subtitle">เลือกได้ไม่เกิน 3 ตัวนะ! 🎉</div>
+    <div class="cards-grid" id="char-grid">
+      <div class="card" data-type="char" data-val="กระต่าย" data-en="rabbit" onclick="selectChar(this)">
+        <img src="images/characters/rabbit.jpg" alt="กระต่าย" onerror="this.style.display='none'">
+        <div class="card-emoji">🐰</div>
+        <div class="card-label">กระต่าย</div>
+      </div>
+      <div class="card" data-type="char" data-val="หมี" data-en="bear" onclick="selectChar(this)">
+        <img src="images/characters/bear.png" alt="หมี" onerror="this.style.display='none'">
+        <div class="card-emoji">🐻</div>
+        <div class="card-label">หมี</div>
+      </div>
+      <div class="card" data-type="char" data-val="แมว" data-en="cat" onclick="selectChar(this)">
+        <img src="images/characters/cat.png" alt="แมว" onerror="this.style.display='none'">
+        <div class="card-emoji">🐱</div>
+        <div class="card-label">แมว</div>
+      </div>
+      <div class="card" data-type="char" data-val="จิ้งจอก" data-en="fox" onclick="selectChar(this)">
+        <img src="images/characters/fox.png" alt="จิ้งจอก" onerror="this.style.display='none'">
+        <div class="card-emoji">🦊</div>
+        <div class="card-label">จิ้งจอก</div>
+      </div>
+      <div class="card" data-type="char" data-val="สิงโต" data-en="lion" onclick="selectChar(this)">
+        <img src="images/characters/lion.jpg" alt="สิงโต" onerror="this.style.display='none'">
+        <div class="card-emoji">🦁</div>
+        <div class="card-label">สิงโต</div>
+      </div>
+      <div class="card" data-type="char" data-val="เป็ด" data-en="duck" onclick="selectChar(this)">
+        <img src="images/characters/duck.jpg" alt="เป็ด" onerror="this.style.display='none'">
+        <div class="card-emoji">🦆</div>
+        <div class="card-label">เป็ด</div>
+      </div>
+      <div class="card" data-type="char" data-val="แม่มด" data-en="witch" onclick="selectChar(this)">
+        <img src="images/characters/witch.png" alt="แม่มด" onerror="this.style.display='none'">
+        <div class="card-emoji">🧙</div>
+        <div class="card-label">แม่มด</div>
+      </div>
+      <div class="card" data-type="char" data-val="ฮีโร่" data-en="superhero" onclick="selectChar(this)">
+        <img src="images/characters/hero.jpg" alt="ฮีโร่" onerror="this.style.display='none'">
+        <div class="card-emoji">🦸</div>
+        <div class="card-label">ฮีโร่</div>
+      </div>
+      <div class="card" data-type="char" data-val="เด็กผู้ชาย" data-en="boy" onclick="selectChar(this)">
+        <img src="images/characters/boy.jpg" alt="เด็กผู้ชาย" onerror="this.style.display='none'">
+        <div class="card-emoji">👦</div>
+        <div class="card-label">เด็กผู้ชาย</div>
+      </div>
+      <div class="card" data-type="char" data-val="เด็กผู้หญิง" data-en="girl" onclick="selectChar(this)">
+        <img src="images/characters/girl.jpg" alt="เด็กผู้หญิง" onerror="this.style.display='none'">
+        <div class="card-emoji">👧</div>
+        <div class="card-label">เด็กผู้หญิง</div>
+      </div>
+    </div>
+    <div class="warning-msg" id="char-warning">⚠️ เลือกได้แค่ 3 ตัวเท่านั้นนะ! 🐾</div>
   </div>
 
-  <!-- ===== STEP 1: BUILDER ===== -->
-  <div class="step-badge">
-    <span class="step-num" style="background:linear-gradient(135deg,var(--pink),#e0479e)">1</span>
-    สร้างเรื่องราวของหนู
-  </div>
-
-  <div class="card" id="builder-card">
-    <div class="card-stripe" style="background:linear-gradient(90deg,var(--pink),var(--purple))"></div>
-
-    <!-- Characters -->
-    <div class="card-title">🎭 เลือกตัวละคร</div>
-    <div class="card-hint">⭐ เลือกได้มากสุด 3 ตัวนะคะ!</div>
-    <div class="choices char-group" id="char-group">
-      <button class="choice-btn" data-group="char" data-value="กระต่าย"     data-en="rabbit"      onclick="selectChar(this)"><span class="em">🐰</span> กระต่าย    <span class="char-badge"></span></button>
-      <button class="choice-btn" data-group="char" data-value="แมว"         data-en="cat"          onclick="selectChar(this)"><span class="em">🐱</span> แมว         <span class="char-badge"></span></button>
-      <button class="choice-btn" data-group="char" data-value="หมี"         data-en="bear"         onclick="selectChar(this)"><span class="em">🐻</span> หมี         <span class="char-badge"></span></button>
-      <button class="choice-btn" data-group="char" data-value="หมาจิ้งจอก"  data-en="fox"          onclick="selectChar(this)"><span class="em">🦊</span> จิ้งจอก     <span class="char-badge"></span></button>
-      <button class="choice-btn" data-group="char" data-value="แพนด้า"      data-en="panda"        onclick="selectChar(this)"><span class="em">🐼</span> แพนด้า      <span class="char-badge"></span></button>
-      <button class="choice-btn" data-group="char" data-value="สิงโต"       data-en="lion"         onclick="selectChar(this)"><span class="em">🦁</span> สิงโต       <span class="char-badge"></span></button>
-      <button class="choice-btn" data-group="char" data-value="เด็กผู้หญิง" data-en="girl"         onclick="selectChar(this)"><span class="em">👧</span> เด็กหญิง    <span class="char-badge"></span></button>
-      <button class="choice-btn" data-group="char" data-value="เด็กผู้ชาย"  data-en="boy"          onclick="selectChar(this)"><span class="em">🧒</span> เด็กชาย     <span class="char-badge"></span></button>
-      <button class="choice-btn" data-group="char" data-value="แม่มดใจร้าย" data-en="evil witch"   onclick="selectChar(this)"><span class="em">🧙</span> แม่มดใจร้าย <span class="char-badge"></span></button>
-      <button class="choice-btn" data-group="char" data-value="ฮีโร่"        data-en="brave hero"   onclick="selectChar(this)"><span class="em">🦸</span> ฮีโร่        <span class="char-badge"></span></button>
-    </div>
-    <div class="char-count-display" id="char-count">เลือกตัวละครได้เลย! 👆</div>
-
-    <div style="height:20px"></div>
-
-    <!-- Place -->
-    <div class="card-title">🗺️ เลือกสถานที่</div>
-    <div class="card-hint">🌍 เลือก 1 สถานที่</div>
-    <div class="choices place-group" id="place-group">
-      <button class="choice-btn" data-group="place" data-value="ป่าวิเศษ"      data-en="magical forest"    onclick="selectOne(this)"><span class="em">🌳</span> ป่าวิเศษ</button>
-      <button class="choice-btn" data-group="place" data-value="เกาะมหัศจรรย์"  data-en="magical island"    onclick="selectOne(this)"><span class="em">🏝</span> เกาะวิเศษ</button>
-      <button class="choice-btn" data-group="place" data-value="ปราสาท"         data-en="enchanted castle"  onclick="selectOne(this)"><span class="em">🏰</span> ปราสาท</button>
-      <button class="choice-btn" data-group="place" data-value="เมืองสายรุ้ง"   data-en="rainbow city"      onclick="selectOne(this)"><span class="em">🌈</span> เมืองสายรุ้ง</button>
-      <button class="choice-btn" data-group="place" data-value="อวกาศ"          data-en="outer space"       onclick="selectOne(this)"><span class="em">🚀</span> อวกาศ</button>
-      <button class="choice-btn" data-group="place" data-value="ดินแดนไดโนเสาร์" data-en="dinosaur land"    onclick="selectOne(this)"><span class="em">🦕</span> ดินแดนไดโนเสาร์</button>
-    </div>
-
-    <div style="height:20px"></div>
-
-    <!-- Mood -->
-    <div class="card-title">💫 เลือกบรรยากาศ</div>
-    <div class="card-hint">🎭 เลือก 1 บรรยากาศ</div>
-    <div class="choices mood-group" id="mood-group">
-      <button class="choice-btn" data-group="mood" data-value="การผจญภัย"     data-en="exciting adventure"    onclick="selectOne(this)"><span class="em">🎒</span> ผจญภัย</button>
-      <button class="choice-btn" data-group="mood" data-value="มหัศจรรย์"     data-en="magical wonder"        onclick="selectOne(this)"><span class="em">✨</span> มหัศจรรย์</button>
-      <button class="choice-btn" data-group="mood" data-value="ช่วยเหลือเพื่อน" data-en="helping friends"     onclick="selectOne(this)"><span class="em">🤝</span> ช่วยเหลือ</button>
-      <button class="choice-btn" data-group="mood" data-value="ไขปริศนา"      data-en="solving a mystery"     onclick="selectOne(this)"><span class="em">🔎</span> ปริศนา</button>
-      <button class="choice-btn" data-group="mood" data-value="เฉลิมฉลอง"     data-en="joyful celebration"    onclick="selectOne(this)"><span class="em">🎉</span> เฉลิมฉลอง</button>
-      <button class="choice-btn" data-group="mood" data-value="ต่อสู้กับความชั่ว" data-en="fighting evil"    onclick="selectOne(this)"><span class="em">⚔️</span> สู้กับความชั่ว</button>
-    </div>
-
-    <div style="height:10px"></div>
-    <div class="btn-create-wrap">
-      <button class="btn-create" onclick="createStory()">✨ สร้างนิทานของฉัน!</button>
+  <!-- SECTION 2: PLACE -->
+  <div class="section section-place">
+    <div class="section-title" style="color: var(--blue);">🗺️ เลือกสถานที่</div>
+    <div class="section-subtitle">เลือกได้ 1 แห่ง 🌍</div>
+    <div class="cards-grid" id="place-grid">
+      <div class="card" data-val="ป่าวิเศษ" data-en="magical forest" onclick="selectSingle(this,'place')">
+        <img src="images/places/forest.jpg" alt="ป่าวิเศษ" onerror="this.style.display='none'">
+        <div class="card-emoji">🌳</div>
+        <div class="card-label">ป่าวิเศษ</div>
+      </div>
+      <div class="card" data-val="ใต้ทะเล" data-en="underwater ocean" onclick="selectSingle(this,'place')">
+        <img src="images/places/ocean.jpg" alt="ใต้ทะเล" onerror="this.style.display='none'">
+        <div class="card-emoji">🌊</div>
+        <div class="card-label">ใต้ทะเล</div>
+      </div>
+      <div class="card" data-val="ชายหาด" data-en="beach" onclick="selectSingle(this,'place')">
+        <img src="images/places/beach.jpg" alt="ชายหาด" onerror="this.style.display='none'">
+        <div class="card-emoji">🏖</div>
+        <div class="card-label">ชายหาด</div>
+      </div>
+      <div class="card" data-val="ปราสาท" data-en="castle" onclick="selectSingle(this,'place')">
+        <img src="images/places/castle.jpg" alt="ปราสาท" onerror="this.style.display='none'">
+        <div class="card-emoji">🏰</div>
+        <div class="card-label">ปราสาท</div>
+      </div>
+      <div class="card" data-val="อวกาศ" data-en="outer space" onclick="selectSingle(this,'place')">
+        <img src="images/places/space.jpg" alt="อวกาศ" onerror="this.style.display='none'">
+        <div class="card-emoji">🚀</div>
+        <div class="card-label">อวกาศ</div>
+      </div>
+      <div class="card" data-val="เมืองสายรุ้ง" data-en="rainbow city" onclick="selectSingle(this,'place')">
+        <img src="images/places/rainbow.jpg" alt="เมืองสายรุ้ง" onerror="this.style.display='none'">
+        <div class="card-emoji">🌈</div>
+        <div class="card-label">เมืองสายรุ้ง</div>
+      </div>
+      <div class="card" data-val="หิมะ" data-en="snowy land" onclick="selectSingle(this,'place')">
+        <img src="images/places/snow.jpg" alt="หิมะ" onerror="this.style.display='none'">
+        <div class="card-emoji">❄️</div>
+        <div class="card-label">หิมะ</div>
+      </div>
     </div>
   </div>
 
-  <!-- ===== STEP 2: PANELS ===== -->
-  <div id="panels-section" class="hidden">
-    <div class="step-badge">
-      <span class="step-num" style="background:linear-gradient(135deg,var(--mint),#1fa86a)">2</span>
-      นิทาน 4 ฉากของหนู 📖
+  <!-- SECTION 3: MOOD -->
+  <div class="section section-mood">
+    <div class="section-title" style="color: var(--purple);">✨ เลือกแบบนิทาน</div>
+    <div class="section-subtitle">นิทานของเราจะเป็นแบบไหน? 🎨</div>
+    <div class="cards-grid" id="mood-grid">
+      <div class="card" data-val="ผจญภัย" data-en="adventure" onclick="selectSingle(this,'mood')">
+        <img src="images/moods/adventure.jpg" alt="ผจญภัย" onerror="this.style.display='none'">
+        <div class="card-emoji">🎒</div>
+        <div class="card-label">ผจญภัย</div>
+      </div>
+      <div class="card" data-val="มหัศจรรย์" data-en="magical wonderful" onclick="selectSingle(this,'mood')">
+        <img src="images/moods/wonderful.jpg" alt="มหัศจรรย์" onerror="this.style.display='none'">
+        <div class="card-emoji">✨</div>
+        <div class="card-label">มหัศจรรย์</div>
+      </div>
+      <div class="card" data-val="ช่วยเพื่อน" data-en="help a friend" onclick="selectSingle(this,'mood')">
+        <img src="images/moods/help.jpg" alt="ช่วยเพื่อน" onerror="this.style.display='none'">
+        <div class="card-emoji">🤝</div>
+        <div class="card-label">ช่วยเพื่อน</div>
+      </div>
+      <div class="card" data-val="ปริศนา" data-en="mystery puzzle" onclick="selectSingle(this,'mood')">
+        <img src="images/moods/puzzle.jpg" alt="ปริศนา" onerror="this.style.display='none'">
+        <div class="card-emoji">🔎</div>
+        <div class="card-label">ปริศนา</div>
+      </div>
+      <div class="card" data-val="กอบกู้โลก" data-en="save the world" onclick="selectSingle(this,'mood')">
+        <img src="images/moods/saveworld.jpg" alt="กอบกู้โลก" onerror="this.style.display='none'">
+        <div class="card-emoji">🌍</div>
+        <div class="card-label">กอบกู้โลก</div>
+      </div>
+      <div class="card" data-val="แข่งกัน" data-en="racing competition" onclick="selectSingle(this,'mood')">
+        <img src="images/moods/fight.jpg" alt="แข่งกัน" onerror="this.style.display='none'">
+        <div class="card-emoji">🏁</div>
+        <div class="card-label">แข่งกัน</div>
+      </div>
     </div>
+  </div>
 
-    <div class="card" id="panels-card">
-      <div class="card-stripe" style="background:linear-gradient(90deg,var(--mint),var(--sky))"></div>
-      <div class="card-title">📖 เรื่องราวของหนู</div>
-      <div class="card-hint" id="panels-subtitle"></div>
-      <div class="panels-grid" id="panels-grid"></div>
-    </div>
+  <!-- CREATE BUTTON -->
+  <button class="btn-create" onclick="generateStory()">✨ สร้างนิทานของฉัน ✨</button>
 
-    <!-- ===== STEP 3: MODE ===== -->
-    <div class="step-badge">
-      <span class="step-num" style="background:linear-gradient(135deg,var(--orange),#e07800)">3</span>
-      เลือกสิ่งที่อยากสร้าง
-    </div>
+  <!-- STORY OUTPUT -->
+  <div id="story-output">
+    <div class="section-divider">🌟 ✨ 🌟</div>
 
-    <div class="card">
-      <div class="card-stripe" style="background:linear-gradient(90deg,var(--orange),var(--yellow))"></div>
-      <div class="card-title">🎨 อยากสร้างอะไร?</div>
-      <div class="card-hint">กดปุ่มด้านล่างเพื่อสร้างภาพหรือวิดีโอ!</div>
-      <div class="mode-grid">
-        <button class="mode-btn mode-image" onclick="showMode('image')">
-          <span class="mode-icon">🎨</span>
-          <span class="mode-label">สร้างภาพนิทาน</span>
-          <span class="mode-desc">สร้างภาพประกอบ 4 ช่องสวยงาม</span>
-        </button>
-        <button class="mode-btn mode-video" onclick="showMode('video')">
-          <span class="mode-icon">🎬</span>
-          <span class="mode-label">สร้างวิดีโอนิทาน</span>
-          <span class="mode-desc">สร้างวิดีโอ animation สุดน่ารัก</span>
-        </button>
+    <div class="section">
+      <div class="section-title" style="color: var(--orange);">📖 นิทาน 4 ตอน</div>
+      <div class="story-panels-grid" id="panels-container"></div>
+
+      <div class="action-buttons">
+        <button class="btn-action btn-image" onclick="generateImagePrompt()">🎨 สร้างภาพนิทาน</button>
+        <button class="btn-action btn-video" onclick="generateVideoPrompts()">🎬 สร้างวิดีโอนิทาน</button>
       </div>
     </div>
 
-    <!-- ===== IMAGE OUTPUT ===== -->
-    <div id="image-output" class="hidden output-section">
-      <div class="step-badge">
-        <span class="step-num" style="background:linear-gradient(135deg,#FF9F43,#FF6B6B)">4</span>
-        คำสั่งสร้างภาพ 🖼️
-      </div>
-      <div class="card">
-        <div class="card-stripe" style="background:linear-gradient(90deg,#FF9F43,#FF6B6B)"></div>
-        <div class="card-title">🖼️ คำสั่งสร้างภาพ 4 ช่อง</div>
-        <div class="card-hint">📋 คัดลอกคำสั่งนี้แล้วนำไปวางใน Gemini!</div>
-        <div class="prompt-box" id="image-prompt-text"></div>
-        <button class="btn-copy" id="copy-img-btn" onclick="copyText('image-prompt-text','copy-img-btn')">📋 คัดลอกคำสั่ง</button>
-        <div class="open-row">
-          <a href="https://gemini.google.com" target="_blank" class="btn-open btn-open-gemini">🎨 เปิด Gemini</a>
-          <div class="instruction-text">💡 คัดลอกคำสั่งด้านบน แล้วนำไปวางใน Gemini เพื่อสร้างภาพนิทาน 4 ช่องสวยงาม!</div>
-        </div>
+    <!-- IMAGE PROMPT BOX -->
+    <div class="prompt-box" id="image-prompt-box">
+      <div class="prompt-box-title" style="color: var(--orange);">🎨 Prompt สำหรับสร้างภาพ</div>
+      <div class="prompt-text" id="image-prompt-text"></div>
+      <button class="btn-copy" id="copy-img-btn" onclick="copyPrompt('image-prompt-text','copy-img-btn')">📋 คัดลอก Prompt</button>
+      <br>
+      <a href="https://gemini.google.com" target="_blank" class="btn-open">🌟 เปิด Gemini</a>
+      <div class="instruction-text">
+        💡 <strong>วิธีใช้:</strong> กด "คัดลอก Prompt" แล้วเปิด Gemini วาง Prompt ลงไป แล้วกด Enter เพื่อสร้างภาพนิทานของคุณ!
       </div>
     </div>
 
-    <!-- ===== VIDEO OUTPUT ===== -->
-    <div id="video-output" class="hidden output-section">
-      <div class="step-badge">
-        <span class="step-num" style="background:linear-gradient(135deg,#5BB8F5,#4A90E2)">4</span>
-        คำสั่งสร้างวิดีโอ 🎬
-      </div>
-      <div class="card">
-        <div class="card-stripe" style="background:linear-gradient(90deg,#5BB8F5,#4A90E2)"></div>
-        <div class="card-title">🎬 คำสั่งสร้างวิดีโอ 4 ฉาก</div>
-        <div class="card-hint">📋 คัดลอกแต่ละฉากแล้วนำไปวางใน Sora!</div>
-        <div id="video-prompts-list"></div>
-        <div class="open-row">
-          <a href="https://sora.com" target="_blank" class="btn-open btn-open-sora">🎬 เปิด Sora</a>
-          <div class="instruction-text">💡 คัดลอกคำสั่งแต่ละฉาก แล้วนำไปวางใน Sora เพื่อสร้างวิดีโอนิทานสุดน่ารัก!</div>
-        </div>
+    <!-- VIDEO PROMPT BOX -->
+    <div class="prompt-box" id="video-prompt-box">
+      <div class="prompt-box-title" style="color: var(--blue);">🎬 Prompt สำหรับสร้างวิดีโอ (4 ฉาก)</div>
+      <div id="video-prompts-container"></div>
+      <a href="https://sora.com" target="_blank" class="btn-open" style="background: linear-gradient(135deg, #4D96FF, #6BCB77);">🚀 เปิด Sora</a>
+      <div class="instruction-text">
+        💡 <strong>วิธีใช้:</strong> คัดลอก Prompt แต่ละฉาก แล้วเปิด Sora วาง Prompt เพื่อสร้างวิดีโอนิทานสุดพิเศษ!
       </div>
     </div>
 
-  </div><!-- /panels-section -->
+    <button class="btn-reset" onclick="resetAll()">🔄 เริ่มใหม่อีกครั้ง</button>
+  </div>
 
-  <div class="footer">🌟 สร้างโดยนักเล่านิทานตัวน้อย 🌟<br>ขอให้สนุกกับการสร้างสรรค์นะคะ 💖</div>
 </div>
 
 <script>
-/* ===================== STATE ===================== */
-const MAX_CHARS = 3;
-let selectedChars  = []; // [{value, en, emoji, btn}]
-let selectedPlace  = null;
-let selectedMood   = null;
-let currentPanels  = [];
+  // State
+  let selectedChars = [];
+  let selectedPlace = null;
+  let selectedMood = null;
+  let storyPanels = [];
 
-/* ===================== SELECTION ===================== */
-function selectChar(btn) {
-  const val = btn.dataset.value;
-  const en  = btn.dataset.en;
-  const em  = btn.querySelector('.em').textContent.trim();
+  // Character selection
+  function selectChar(card) {
+    const val = card.dataset.val;
+    const en = card.dataset.en;
+    const idx = selectedChars.findIndex(c => c.val === val);
 
-  if (btn.classList.contains('selected')) {
-    // Deselect
-    btn.classList.remove('selected');
-    selectedChars = selectedChars.filter(c => c.value !== val);
-  } else {
-    if (selectedChars.length >= MAX_CHARS) {
-      flashCount();
-      return;
+    if (idx > -1) {
+      selectedChars.splice(idx, 1);
+      card.classList.remove('selected');
+    } else {
+      if (selectedChars.length >= 3) {
+        document.getElementById('char-warning').classList.add('show');
+        setTimeout(() => document.getElementById('char-warning').classList.remove('show'), 2500);
+        return;
+      }
+      selectedChars.push({ val, en });
+      card.classList.add('selected');
     }
-    btn.classList.add('selected');
-    selectedChars.push({ value: val, en: en, emoji: em, btn });
-  }
-  updateCharBadges();
-  updateCharCount();
-}
-
-function updateCharBadges() {
-  document.querySelectorAll('#char-group .choice-btn').forEach(b => {
-    const badge = b.querySelector('.char-badge');
-    if (!badge) return;
-    if (b.classList.contains('selected')) {
-      const idx = selectedChars.findIndex(c => c.value === b.dataset.value);
-      badge.textContent = idx + 1;
-    }
-  });
-}
-
-function updateCharCount() {
-  const el = document.getElementById('char-count');
-  if (selectedChars.length === 0) {
-    el.textContent = 'เลือกตัวละครได้เลย! 👆';
-    el.style.color = 'var(--text-s)';
-  } else if (selectedChars.length === MAX_CHARS) {
-    el.textContent = `✅ เลือกครบ ${MAX_CHARS} ตัวแล้ว!`;
-    el.style.color = 'var(--mint)';
-  } else {
-    el.textContent = `⭐ เลือกแล้ว ${selectedChars.length} ตัว (เลือกได้อีก ${MAX_CHARS - selectedChars.length} ตัว)`;
-    el.style.color = 'var(--pink)';
-  }
-}
-
-function flashCount() {
-  const el = document.getElementById('char-count');
-  el.textContent = '🚫 เลือกได้มากสุด 3 ตัวนะคะ!';
-  el.style.color = '#e03060';
-  el.style.animation = 'none';
-  setTimeout(() => { el.style.animation = ''; updateCharCount(); }, 1400);
-}
-
-function selectOne(btn) {
-  const group = btn.dataset.group;
-  const groupEl = document.getElementById(group + '-group');
-  groupEl.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  if (group === 'place') selectedPlace = { value: btn.dataset.value, en: btn.dataset.en };
-  if (group === 'mood')  selectedMood  = { value: btn.dataset.value, en: btn.dataset.en };
-}
-
-/* ===================== STORY GENERATION ===================== */
-function buildCharString(arr) {
-  if (!arr.length) return 'ตัวละคร';
-  return arr.map(c => c.emoji + c.value).join(' และ ');
-}
-function buildCharEnString(arr) {
-  if (!arr.length) return 'characters';
-  return arr.map(c => c.en).join(' and ');
-}
-
-const storyDB = {
-  "ป่าวิเศษ|การผจญภัย":    ["พบกันในป่าวิเศษที่เต็มไปด้วยแสงทอง", "ค้นพบเส้นทางลึกลับที่นำไปสู่สมบัติลึกลับ", "ช่วยกันต่อสู้กับมังกรน้อยที่หลงทาง", "เฉลิมฉลองการผจญภัยครั้งยิ่งใหญ่พร้อมหน้า"],
-  "ป่าวิเศษ|มหัศจรรย์":    ["พบกันใต้ต้นไม้วิเศษที่มีดอกไม้เรืองแสง", "นางฟ้าปรากฏตัวและมอบพลังวิเศษให้ทุกคน", "ใช้พลังวิเศษปลุกต้นไม้โบราณให้ตื่นขึ้น", "ป่าทั้งหมดสว่างไสวด้วยแสงมหัศจรรย์"],
-  "ป่าวิเศษ|ช่วยเหลือเพื่อน": ["พบกันในป่าและเห็นนกน้อยตกบาดเจ็บ", "ช่วยกันหายาสมุนไพรรักษานกน้อยที่บาดเจ็บ", "สัตว์ป่าทุกตัวมาร่วมช่วยกันดูแล", "นกน้อยหายดีและบินพาทุกคนชมป่าสวยงาม"],
-  "ป่าวิเศษ|ไขปริศนา":     ["พบกันและเห็นประตูลับซ่อนอยู่ในป่า", "ไขปริศนาอักษรวิเศษหน้าประตูลับ", "เปิดประตูพบห้องเต็มไปด้วยหนังสือนิทาน", "อ่านนิทานด้วยกันและเรียนรู้ความลับของป่า"],
-  "ป่าวิเศษ|เฉลิมฉลอง":    ["ตั้งค่ายปิกนิกกลางป่าพร้อมกัน", "สัตว์ป่าทุกตัวพากันร้องเพลงและเต้นรำ", "ทำเค้กจากดอกไม้ป่าและผลไม้หวาน", "งานเลี้ยงฉลองสนุกสนานจนพระอาทิตย์ตก"],
-  "เกาะมหัศจรรย์|การผจญภัย": ["ล่องเรือมาถึงเกาะลึกลับในทะเลสีฟ้า", "ค้นพบแผนที่สมบัติที่ซ่อนในถ้ำปะการัง", "ดำน้ำผ่านปลาหลากสีหาสมบัติใต้ทะเล", "พบสมบัติที่แท้จริงคือมิตรภาพที่งดงาม"],
-  "เกาะมหัศจรรย์|มหัศจรรย์": ["ลงเรือมาถึงเกาะที่ส่องแสงสีทอง", "พบหอยมุกวิเศษที่พูดได้และมอบพรให้", "เหาะขึ้นไปบนสายรุ้งที่ปกคลุมเกาะ", "เกาะทั้งหมดกลายเป็นสวรรค์สีสันงดงาม"],
-  "เกาะมหัศจรรย์|ช่วยเหลือเพื่อน": ["ขึ้นฝั่งเกาะและพบเต่าน้อยที่ต้องการความช่วยเหลือ", "ช่วยกันนำเต่ากลับสู่ทะเลอย่างปลอดภัย", "ปลาโลมาขอบคุณและพาทุกคนว่ายน้ำ", "ฉลองมิตรภาพใหม่ริมหาดทรายสีทอง"],
-  "เกาะมหัศจรรย์|ไขปริศนา": ["พบขวดปริศนาลอยน้ำมาถึงหาด", "แกะปริศนาจากแผนที่ลายมือในขวด", "สำรวจถ้ำลึกตามเส้นทางในแผนที่", "ค้นพบความลับของเกาะที่ซ่อนมาพันปี"],
-  "เกาะมหัศจรรย์|เฉลิมฉลอง": ["ร่วมกันสร้างเมืองทรายที่สวยงาม", "ชาวเกาะนำอาหารทะเลอร่อยมาเลี้ยง", "เต้นรำระบำใต้แสงจันทร์ริมทะเล", "ดูดาวด้วยกันและตั้งชื่อดาวใหม่"],
-  "ปราสาท|การผจญภัย":     ["เดินทางมาถึงปราสาทสีทองกลางเมฆ", "ผ่านด่านทดสอบความกล้าหาญในปราสาท", "ช่วยกันปลดปล่อยสัตว์ที่ถูกขังในหอคอย", "ได้รับรางวัลและกลายเป็นวีรบุรุษของปราสาท"],
-  "ปราสาท|มหัศจรรย์":     ["ได้รับเชิญไปงานเลี้ยงมหัศจรรย์ในปราสาท", "พบแม่มดใจดีที่สอนวิชาวิเศษ", "ทดลองใช้ไม้กายสิทธิ์สร้างสิ่งสวยงาม", "ปราสาทเปลี่ยนเป็นสถานที่มหัศจรรย์ตลอดกาล"],
-  "ปราสาท|ช่วยเหลือเพื่อน": ["พบเจ้าหญิงน้อยร้องไห้หน้าปราสาท", "ช่วยตามหาแมวเลี้ยงที่หายไปในปราสาท", "สำรวจทุกห้องในปราสาทจนพบแมวน้อย", "เจ้าหญิงดีใจมากและเลี้ยงงานฉลองให้"],
-  "ปราสาท|ไขปริศนา":      ["พบกุญแจลึกลับหน้าประตูปราสาท", "ไขปริศนาอักษรโบราณบนกำแพงปราสาท", "เปิดห้องลับที่ไม่มีใครเคยเข้า", "พบสมบัติที่ซ่อนอยู่และรู้ประวัติปราสาท"],
-  "ปราสาท|เฉลิมฉลอง":     ["ได้รับเชิญไปงานบอลที่ปราสาท", "แต่งตัวสวยงามและเต้นรำสนุกสนาน", "กินอาหารอร่อยและดูดอกไม้ไฟ", "กลับบ้านพร้อมความทรงจำงดงาม"],
-  "ดินแดนสายรุ้ง|การผจญภัย": ["กระโดดผ่านสายรุ้งมาถึงดินแดนสีสัน", "วิ่งผ่านทุ่งลูกอมและต้นไม้น้ำตาล", "พบยักษ์ขนมหวานและต้องต่อสู้", "ชนะยักษ์และดินแดนสายรุ้งสงบสุข"],
-  "ดินแดนสายรุ้ง|มหัศจรรย์": ["พบม้ายูนิคอร์นสีชมพูในดินแดนสายรุ้ง", "ขี่ยูนิคอร์นบินขึ้นสู่ท้องฟ้าสีรุ้ง", "วาดภาพบนก้อนเมฆด้วยแปรงวิเศษ", "ภาพกลายเป็นจริงและทำให้ทุกคนยิ้ม"],
-  "ดินแดนสายรุ้ง|ช่วยเหลือเพื่อน": ["พบว่าดินแดนสายรุ้งสีจางและเศร้า", "ช่วยกันระบายสีใหม่ให้ดินแดนสายรุ้ง", "ชาวดินแดนสายรุ้งมาช่วยกันด้วย", "สายรุ้งกลับมาสดใสและทุกคนดีใจมาก"],
-  "ดินแดนสายรุ้ง|ไขปริศนา": ["พบหินสีรุ้งที่มีสัญลักษณ์ลึกลับ", "ไขปริศนาสีและเสียงของดินแดน", "ค้นพบแหล่งกำเนิดสายรุ้งที่ซ่อนอยู่", "รู้ความลับว่าสายรุ้งเกิดจากมิตรภาพ"],
-  "ดินแดนสายรุ้ง|เฉลิมฉลอง": ["จัดงานเทศกาลสีสันในดินแดนสายรุ้ง", "ทุกคนวาดภาพและร้องเพลงด้วยกัน", "ทำลูกอมสายรุ้งแจกจ่ายทุกคน", "ฉลองมิตรภาพใหม่ใต้สายรุ้งสวยงาม"],
-  "อวกาศ|การผจญภัย":      ["สวมชุดอวกาศและออกเดินทางสู่ดวงดาว", "จรวดผ่านกาแล็กซีสีม่วงสวยงาม", "เจอดาวเคราะห์ลึกลับที่มีชีวิตอยู่", "ปฏิบัติภารกิจสำเร็จและกลับโลกอย่างวีรบุรุษ"],
-  "อวกาศ|มหัศจรรย์":      ["พบดาวพิเศษที่ทำให้ความฝันเป็นจริง", "ขี่สะเก็ดดาวตกท่องกาแล็กซี", "ดาวเสาร์มอบแหวนดาวเป็นของขวัญ", "กลับบ้านพร้อมดาวกระจายสว่างไสว"],
-  "อวกาศ|ช่วยเหลือเพื่อน": ["พบมนุษย์ต่างดาวน้อยที่หลงทางในอวกาศ", "ช่วยกันซ่อมจรวดของมนุษย์ต่างดาว", "พาเพื่อนต่างดาวกลับสู่ดาวเคราะห์บ้านเกิด", "ส่งข้อความมิตรภาพข้ามกาแล็กซี"],
-  "อวกาศ|ไขปริศนา":       ["พบสัญญาณลึกลับจากดาวห่างไกล", "ถอดรหัสสัญญาณด้วยคอมพิวเตอร์อวกาศ", "ค้นพบดาวเคราะห์ซ่อนเร้นที่ไม่มีชื่อ", "ตั้งชื่อดาวใหม่ว่า 'ดาวมิตรภาพ'"],
-  "อวกาศ|เฉลิมฉลอง":      ["จัดงานฉลองบนดวงจันทร์", "กินอาหารอวกาศและเต้นรำไร้แรงโน้มถ่วง", "จุดดอกไม้ไฟในอวกาศสว่างไสว", "ถ่ายรูปกับโลกสีฟ้าเป็นที่ระลึก"],
-};
-
-function getStoryPanels(charsTh, place, mood) {
-  const key = `${place}|${mood}`;
-  const base = storyDB[key] || storyDB["ป่าวิเศษ|การผจญภัย"];
-  const charStr = buildCharString(charsTh);
-  return base.map((s, i) => {
-    if (i === 0) return `${charStr} ${s}`;
-    return s;
-  });
-}
-
-/* ===================== MAIN CREATE ===================== */
-function createStory() {
-  if (!selectedChars.length || !selectedPlace || !selectedMood) {
-    const card = document.getElementById('builder-card');
-    card.classList.add('shake');
-    card.addEventListener('animationend', () => card.classList.remove('shake'), {once:true});
-    const missing = [];
-    if (!selectedChars.length) missing.push('ตัวละคร');
-    if (!selectedPlace) missing.push('สถานที่');
-    if (!selectedMood) missing.push('บรรยากาศ');
-    alert(`⚠️ กรุณาเลือก: ${missing.join(', ')} ก่อนนะคะ! 🙏`);
-    return;
+    document.getElementById('char-counter').textContent = selectedChars.length + '/3';
   }
 
-  const panels = getStoryPanels(selectedChars, selectedPlace.value, selectedMood.value);
-  currentPanels = panels;
+  // Single select (place or mood)
+  function selectSingle(card, type) {
+    const grid = type === 'place' ? 'place-grid' : 'mood-grid';
+    const cls = type === 'place' ? 'selected-place' : 'selected-mood';
+    document.querySelectorAll('#' + grid + ' .card').forEach(c => c.classList.remove(cls));
+    card.classList.add(cls);
+    if (type === 'place') selectedPlace = { val: card.dataset.val, en: card.dataset.en };
+    else selectedMood = { val: card.dataset.val, en: card.dataset.en };
+  }
 
-  // Render panels
-  const panelIcons = ['🌅','🌿','💫','🎊'];
-  const panelNums  = ['ฉากที่ 1 📖','ฉากที่ 2 📖','ฉากที่ 3 📖','ฉากที่ 4 📖'];
-  const grid = document.getElementById('panels-grid');
-  grid.innerHTML = '';
-  panels.forEach((p, i) => {
-    const div = document.createElement('div');
-    div.className = 'panel-box';
-    div.innerHTML = `<div class="panel-num">${panelNums[i]}</div>
-      <div class="panel-text">${p}</div>
-      <span class="panel-deco">${panelIcons[i]}</span>`;
-    grid.appendChild(div);
-  });
+  // Story templates
+  const storyTemplates = {
+    'ผจญภัย': [
+      '{char1}กับ{char2}ออกเดินทางผจญภัยใน{place}',
+      'ทั้งสองพบเส้นทางลึกลับที่ไม่เคยมีใครไป',
+      'พวกเขาเจอปัญหาใหญ่และต้องช่วยกันแก้ปัญหา',
+      'ในที่สุดพวกเขากลับบ้านพร้อมกับความทรงจำที่ดีที่สุด'
+    ],
+    'มหัศจรรย์': [
+      '{char1}พบของวิเศษใน{place}โดยบังเอิญ',
+      'ของวิเศษนั้นทำให้เกิดปาฏิหาริย์สุดน่าทึ่ง',
+      '{char2}มาช่วยและทั้งสองใช้เวทมนตร์ร่วมกัน',
+      'โลกทั้งใบส่องสว่างด้วยแสงมหัศจรรย์ของมิตรภาพ'
+    ],
+    'ช่วยเพื่อน': [
+      '{char1}เดินอยู่ใน{place}แล้วได้ยินเสียงร้องขอความช่วยเหลือ',
+      '{char2}ติดอยู่ในที่อันตรายและต้องการความช่วยเหลือ',
+      '{char1}คิดหาวิธีช่วยเพื่อนด้วยความกล้าหาญ',
+      'ทั้งสองได้เป็นเพื่อนที่ดีต่อกันตลอดไป'
+    ],
+    'ปริศนา': [
+      '{char1}พบปริศนาลึกลับใน{place}ที่ไม่มีใครไขได้',
+      'มีเบาะแสซ่อนอยู่ทุกมุมที่ต้องค้นหา',
+      '{char2}ช่วยกันคิดและค้นพบความลับที่ซ่อนไว้',
+      'ปริศนาถูกไขแล้วและทุกคนดีใจมาก'
+    ],
+    'กอบกู้โลก': [
+      '{place}กำลังตกอยู่ในอันตราย {char1}ต้องช่วยโลก',
+      '{char2}เข้าร่วมทีมและทั้งสองวางแผนช่วยโลก',
+      'พวกเขาต่อสู้กับความชั่วร้ายด้วยความกล้าหาญ',
+      'โลกได้รับการช่วยเหลือและทุกคนเป็นฮีโร่'
+    ],
+    'แข่งกัน': [
+      '{char1}กับ{char2}เริ่มการแข่งขันสุดสนุกใน{place}',
+      'ทั้งสองวิ่งแข่งกันอย่างสนุกสนานและมีกีฬาใจ',
+      'มีอุปสรรคมากมายในเส้นทางแต่ทั้งสองไม่ยอมแพ้',
+      'เส้นเข้าเส้นชัยมาถึง ทั้งสองจับมือกันและยิ้มให้กัน'
+    ]
+  };
 
-  const charStr = buildCharString(selectedChars);
-  document.getElementById('panels-subtitle').textContent =
-    `${charStr} ใน${selectedPlace.value} — ${selectedMood.value}`;
+  function generateStory() {
+    if (selectedChars.length === 0) { alert('กรุณาเลือกตัวละครอย่างน้อย 1 ตัวนะ! 🐾'); return; }
+    if (!selectedPlace) { alert('กรุณาเลือกสถานที่ด้วยนะ! 🗺️'); return; }
+    if (!selectedMood) { alert('กรุณาเลือกแบบนิทานด้วยนะ! ✨'); return; }
 
-  // Show panels, hide outputs
-  const ps = document.getElementById('panels-section');
-  ps.classList.remove('hidden');
-  document.getElementById('image-output').classList.add('hidden');
-  document.getElementById('video-output').classList.add('hidden');
+    const mood = selectedMood.val;
+    const templates = storyTemplates[mood] || storyTemplates['ผจญภัย'];
+    const char1 = selectedChars[0]?.val || 'เพื่อน';
+    const char2 = selectedChars[1]?.val || selectedChars[0]?.val || 'เพื่อน';
+    const place = selectedPlace.val;
 
-  launchConfetti(28);
-  setTimeout(() => ps.scrollIntoView({ behavior:'smooth', block:'start' }), 200);
-}
+    storyPanels = templates.map(t =>
+      t.replace(/{char1}/g, char1).replace(/{char2}/g, char2).replace(/{place}/g, place)
+    );
 
-/* ===================== MODE ===================== */
-function showMode(mode) {
-  const charEnStr  = buildCharEnString(selectedChars);
-  const placeEn    = selectedPlace ? selectedPlace.en : 'magical place';
-  const moodEn     = selectedMood  ? selectedMood.en  : 'adventure';
-  const charsThStr = buildCharString(selectedChars);
-
-  if (mode === 'image') {
-    document.getElementById('video-output').classList.add('hidden');
-    const output = document.getElementById('image-output');
-    output.classList.remove('hidden');
-
-    const panelDescs = currentPanels.map((p,i) => {
-      const panelEnDescriptions = [
-        `${charEnStr} meeting in ${placeEn}`,
-        `${charEnStr} discovering something wonderful in ${placeEn}`,
-        `${charEnStr} working together during ${moodEn}`,
-        `${charEnStr} celebrating friendship in ${placeEn}`
-      ];
-      return `panel ${i+1}: ${panelEnDescriptions[i]}`;
+    const container = document.getElementById('panels-container');
+    container.innerHTML = '';
+    storyPanels.forEach((text, i) => {
+      container.innerHTML += `
+        <div class="story-panel">
+          <div class="panel-number">✨ ช่องที่ ${i+1}</div>
+          <div class="panel-text">${text}</div>
+        </div>
+      `;
     });
 
-    const prompt = `วาดนิทาน 4 ช่องสำหรับเด็ก, cute colorful children's comic strip, ${panelDescs.join(', ')}, storybook illustration style, bright pastel colors, kawaii style, watercolor texture, age 6 children's book art`;
+    // Hide prompt boxes
+    document.getElementById('image-prompt-box').classList.remove('show');
+    document.getElementById('video-prompt-box').classList.remove('show');
+
+    const output = document.getElementById('story-output');
+    output.style.display = 'block';
+    output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function generateImagePrompt() {
+    const chars = selectedChars.map(c => c.en).join(', ');
+    const place = selectedPlace.en;
+    const mood = selectedMood.en;
+    const p = storyPanels;
+
+    const prompt = `วาดนิทาน 4 ช่องสำหรับเด็ก, colorful children's comic illustration, ${mood} story style, panel 1: ${p[0]} (${chars} in ${place}), panel 2: ${p[1]}, panel 3: ${p[2]}, panel 4: ${p[3]}, bright pastel storybook style, cute cartoon characters, Thai children's book art`;
+
     document.getElementById('image-prompt-text').textContent = prompt;
+    const box = document.getElementById('image-prompt-box');
+    box.classList.add('show');
+    document.getElementById('video-prompt-box').classList.remove('show');
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
-    setTimeout(() => output.scrollIntoView({ behavior:'smooth', block:'start' }), 200);
+  function generateVideoPrompts() {
+    const chars = selectedChars.map(c => c.en).join(' and ');
+    const place = selectedPlace.en;
+    const mood = selectedMood.en;
+    const p = storyPanels;
 
-  } else {
-    document.getElementById('image-output').classList.add('hidden');
-    const output = document.getElementById('video-output');
-    output.classList.remove('hidden');
-
-    const videoSceneDescs = [
-      `${charEnStr} meeting together in ${placeEn}, colorful children's animation`,
-      `${charEnStr} discovering a wonderful path in ${placeEn}, magical glow`,
-      `${charEnStr} helping each other during ${moodEn}, warm and cheerful`,
-      `${charEnStr} celebrating friendship together in ${placeEn}, joyful confetti`
+    const scenePrompts = [
+      `นิทานสำหรับเด็ก 4 ฉาก ภาษาไทย, ${p[0]}, ${chars} in ${place}, colorful children's animation style, cute and playful, ${mood}`,
+      `นิทานสำหรับเด็ก 4 ฉาก ภาษาไทย, ${p[1]}, cute cartoon characters exploring together, bright storybook animation`,
+      `นิทานสำหรับเด็ก 4 ฉาก ภาษาไทย, ${p[2]}, heartwarming scene, soft pastel colors, children's animation`,
+      `นิทานสำหรับเด็ก 4 ฉาก ภาษาไทย, ${p[3]}, happy ending scene, ${chars} celebrating together, colorful joyful animation`
     ];
 
-    const list = document.getElementById('video-prompts-list');
-    list.innerHTML = '';
-    videoSceneDescs.forEach((desc, i) => {
-      const fullPrompt = `นิทานสำหรับเด็ก 4 ฉาก ภาษาไทย, ${desc}, cute kawaii animation style, soft pastel colors, children's storybook`;
-      const div = document.createElement('div');
-      div.className = 'video-prompt-item';
-      div.innerHTML = `
-        <div class="vp-label">🎬 คำสั่งฉากที่ ${i+1}</div>
-        <div class="vp-text" id="vp-${i}">${fullPrompt}</div>
-        <button class="btn-copy" id="vp-btn-${i}" onclick="copyText('vp-${i}','vp-btn-${i}')">📋 คัดลอก</button>
+    const container = document.getElementById('video-prompts-container');
+    container.innerHTML = '';
+    scenePrompts.forEach((prompt, i) => {
+      container.innerHTML += `
+        <div class="video-scene-box">
+          <div class="video-scene-label">🎬 ฉากที่ ${i+1}</div>
+          <div class="prompt-text" id="vid-prompt-${i}">${prompt}</div>
+          <button class="btn-copy" id="copy-vid-${i}" onclick="copyPrompt('vid-prompt-${i}','copy-vid-${i}')">📋 คัดลอก</button>
+        </div>
       `;
-      list.appendChild(div);
     });
 
-    setTimeout(() => output.scrollIntoView({ behavior:'smooth', block:'start' }), 200);
+    const box = document.getElementById('video-prompt-box');
+    box.classList.add('show');
+    document.getElementById('image-prompt-box').classList.remove('show');
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  launchConfetti(16);
-}
-
-/* ===================== COPY ===================== */
-function copyText(textId, btnId) {
-  const text = document.getElementById(textId).textContent;
-  const btn  = document.getElementById(btnId);
-  navigator.clipboard.writeText(text).then(() => {
-    btn.textContent = '✅ คัดลอกแล้ว!';
-    btn.classList.add('done');
-    setTimeout(() => {
-      btn.textContent = '📋 คัดลอก';
-      btn.classList.remove('done');
-    }, 2200);
-  }).catch(() => {
-    // Fallback
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed'; ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.select(); document.execCommand('copy');
-    document.body.removeChild(ta);
-    btn.textContent = '✅ คัดลอกแล้ว!';
-    btn.classList.add('done');
-    setTimeout(() => { btn.textContent = '📋 คัดลอก'; btn.classList.remove('done'); }, 2200);
-  });
-}
-
-/* ===================== CONFETTI ===================== */
-function launchConfetti(n) {
-  const cols = ['#FF7EB3','#FFD93D','#5DD8A4','#5BB8F5','#B57BEE','#FF9F43','#FF6B6B'];
-  for (let i = 0; i < n; i++) {
-    setTimeout(() => {
-      const el = document.createElement('div');
-      el.className = 'conf';
-      el.style.left     = Math.random() * 100 + 'vw';
-      el.style.background = cols[Math.floor(Math.random() * cols.length)];
-      el.style.animationDuration  = (1.8 + Math.random() * 2.2) + 's';
-      el.style.animationDelay     = (Math.random() * 0.4) + 's';
-      el.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
-      const sz = 8 + Math.random() * 10;
-      el.style.width = el.style.height = sz + 'px';
-      document.body.appendChild(el);
-      setTimeout(() => el.remove(), 4500);
-    }, i * 55);
+  function copyPrompt(textId, btnId) {
+    const text = document.getElementById(textId).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById(btnId);
+      btn.textContent = '✅ คัดลอกแล้ว!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = '📋 คัดลอก';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
   }
-}
+
+  function resetAll() {
+    selectedChars = [];
+    selectedPlace = null;
+    selectedMood = null;
+    storyPanels = [];
+    document.querySelectorAll('.card').forEach(c => {
+      c.classList.remove('selected', 'selected-place', 'selected-mood');
+    });
+    document.getElementById('char-counter').textContent = '0/3';
+    document.getElementById('story-output').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 </script>
 </body>
 </html>
